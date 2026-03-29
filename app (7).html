@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#faf8f5">
+    <title>Yash Salon | Luxury Beauty Experience</title>
+    <style>
+        :root {
+            --cream: #faf8f5;
+            --beige: #f5f0e8;
+            --sand: #e8e0d5;
+            --gold: #d4af37;
+            --gold-light: #f4e5c2;
+            --pink-soft: #ffe4e1;
+            --text-dark: #2c2c2c;
+            --text-muted: #6b6b6b;
+            --glass: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(212, 175, 55, 0.2);
+            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.1);
+            --shadow-gold: 0 10px 40px -10px rgba(212, 175, 55, 0.3);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        /* Scroll Progress - Gold */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), #f4e5c2);
+            z-index: 10000;
+            width: 0%;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s var(--ease-out);
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+            padding: 1rem 3rem;
+        }
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            text-decoration: none;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '®';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -1rem;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                display: flex;
+                gap: 3rem;
+            }
+            .nav-links a {
+                color: var(--text-muted);
+                text-decoration: none;
+                font-size: 0.85rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                transition: color 0.3s;
+                position: relative;
+            }
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: var(--gold);
+                transition: width 0.3s var(--ease-out);
+            }
+            .nav-links a:hover {
+                color: var(--text-dark);
+            }
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, rgba(250,248,245,0.2) 0%, rgba(250,248,245,0.8) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%23faf8f5" width="1920" height="1080"/><g opacity="0.3"><circle cx="200" cy="200" r="150" fill="%23ffb6c1" filter="blur(80px)"/><circle cx="1700" cy="800" r="200" fill="%23d4af37" filter="blur(100px)"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(250,248,245,0.4) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s var(--ease-out) forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 300;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeUp 1.2s 0.3s var(--ease-out) forwards;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeUp 1.2s 0.6s var(--ease-out) forwards;
+        }
+
+        .btn-gold {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--gold), #c5a028);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-outline {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-muted);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            margin-left: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .hero-cta {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* 3D Floating Element */
+        .floating-scissors {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 200px;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .floating-scissors {
+                display: none;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-60%) rotate(5deg); }
+        }
+
+        /* Section General */
+        section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                padding: 10rem 3rem;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s var(--ease-out);
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.5s var(--ease-out);
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-gold);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--beige);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s var(--ease-out);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .pricing-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(244, 229, 194, 0.3));
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: var(--shadow-gold);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        .pricing-card.featured.visible {
+            transform: scale(1.05) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.featured.visible {
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .pricing-name {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin: 1.5rem 0;
+            font-family: Georgia, serif;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Before/After */
+        .comparison-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border: 1px solid var(--glass-border);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                height: 400px;
+            }
+        }
+
+        .comparison-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .comparison-image.before {
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+            z-index: 2;
+            width: 50%;
+            border-right: 2px solid var(--gold);
+        }
+
+        .comparison-image.after {
+            background: linear-gradient(135deg, #faf8f5 0%, #f0e6d8 100%);
+            z-index: 1;
+        }
+
+        .comparison-label {
+            position: absolute;
+            top: 2rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 3;
+            color: var(--text-dark);
+            backdrop-filter: blur(10px);
+        }
+
+        .comparison-label.before-label {
+            left: 2rem;
+        }
+
+        .comparison-label.after-label {
+            right: 2rem;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            z-index: 4;
+            cursor: ew-resize;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            touch-action: none;
+        }
+
+        /* Stylists */
+        .stylists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .stylist-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-out);
+        }
+
+        .stylist-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stylist-image {
+            width: 250px;
+            height: 300px;
+            margin: 0 auto 1.5rem;
+            border-radius: 150px 150px 20px 20px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.4s;
+            background: linear-gradient(135deg, var(--sand), var(--beige));
+        }
+
+        .stylist-card:hover .stylist-image {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stylist-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .stylist-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .stylist-role {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .stylist-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .stylist-card:hover .stylist-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stylist-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .stylist-social a:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+
+        /* Gallery */
+        .gallery {
+            background: var(--beige);
+            padding: 6rem 1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--sand), var(--cream));
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-gold);
+            z-index: 2;
+        }
+
+        .gallery-item::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0.5;
+        }
+
+        /* Testimonials */
+        .testimonials-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.6s var(--ease-out);
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 3rem;
+            text-align: center;
+            opacity: 0.4;
+            transition: opacity 0.6s;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+        }
+
+        .testimonial-text {
+            font-family: Georgia, serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--sand);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .testimonial-dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: scale(1.3);
+        }
+
+        /* Booking Section */
+        .booking {
+            background: linear-gradient(135deg, var(--cream), var(--beige));
+        }
+
+        .booking-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (max-width: 768px) {
+            .booking-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23d4af37'%3E%3Cpath d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 3rem;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--text-dark);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item-large {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-icon-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .contact-value {
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-value:hover {
+            color: var(--gold);
+        }
+
+        /* Mobile Sticky CTA */
+        .mobile-sticky-book {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(250, 248, 245, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            z-index: 999;
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-sticky-book.visible {
+                transform: translateY(0);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .mobile-sticky-book {
+                display: none;
+            }
+        }
+
+        .mobile-sticky-book .btn-gold {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--text-dark);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            footer {
+                margin-bottom: 80px;
+            }
+        }
+
+        /* Ambient glow */
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            top: -300px;
+            right: -300px;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="ambient-glow"></div>
+
+    <nav id="navbar">
+        <a href="#" class="logo">YASH SALON</a>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#stylists">Stylists</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">Book Now</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-video-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="floating-scissors">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(212,175,55,0.2));">
+                <defs>
+                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f4e5c2;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M60 40 L140 160 M140 40 L60 160" stroke="url(#goldGrad)" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="60" cy="40" r="15" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+                <circle cx="140" cy="40" r="15" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+                <circle cx="100" cy="100" r="5" fill="url(#goldGrad)"/>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <h1>Luxury Beauty <span>Experience</span></h1>
+            <p class="hero-sub">Where Style Meets Perfection</p>
+            <div class="hero-cta">
+                <a href="#booking" class="btn-gold">Book Appointment</a>
+                <a href="#services" class="btn-outline">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Our Services</div>
+                <h2>Signature Treatments</h2>
+                <p>Indulge in our premium beauty services crafted for the discerning individual</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">💇‍♀️</span>
+                    <h3>Hair Styling</h3>
+                    <p>Precision cuts, creative coloring, and transformative styling by award-winning artists</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">✨</span>
+                    <h3>Makeup Artistry</h3>
+                    <p>Bridal, editorial, and special occasion makeup using luxury international products</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🧖‍♀️</span>
+                    <h3>Spa Therapy</h3>
+                    <p>Rejuvenating facials, relaxing massages, and holistic wellness treatments</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">💅</span>
+                    <h3>Nail Artistry</h3>
+                    <p>Luxury manicures, pedicures, and custom nail art with premium polishes</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🌸</span>
+                    <h3>Skin Care</h3>
+                    <p>Advanced dermatological treatments and personalized skin wellness programs</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">👰</span>
+                    <h3>Bridal Packages</h3>
+                    <p>Comprehensive bridal beauty services for your most special day</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Investment</div>
+                <h2>Pricing Plans</h2>
+                <p>Luxury beauty experiences tailored to your needs</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Essential</div>
+                    <div class="pricing-price">₹2,999<span>/visit</span></div>
+                    <ul class="pricing-features">
+                        <li>Hair Cut & Styling</li>
+                        <li>Basic Facial</li>
+                        <li>Manicure or Pedicure</li>
+                        <li>Complimentary Beverage</li>
+                    </ul>
+                    <button class="btn-outline" style="width:100%">Select</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-name">Luxury</div>
+                    <div class="pricing-price">₹7,999<span>/visit</span></div>
+                    <ul class="pricing-features">
+                        <li>Hair Cut, Color & Treatment</li>
+                        <li>Advanced Facial Therapy</li>
+                        <li>Full Manicure & Pedicure</li>
+                        <li>Makeup Consultation</li>
+                        <li>Private Suite Access</li>
+                        <li>Champagne Service</li>
+                    </ul>
+                    <button class="btn-gold" style="width:100%">Select</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-name">Royal</div>
+                    <div class="pricing-price">₹15,999<span>/visit</span></div>
+                    <ul class="pricing-features">
+                        <li>Full Day Spa Experience</li>
+                        <li>Personal Stylist</li>
+                        <li>Premium Skincare Treatment</li>
+                        <li>Bridal Makeup Trial</li>
+                        <li>Exclusive Lounge Access</li>
+                        <li>Gift Hamper</li>
+                    </ul>
+                    <button class="btn-outline" style="width:100%">Select</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="transformations">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Results</div>
+                <h2>Before & After</h2>
+                <p>Witness the transformative power of our expert stylists</p>
+            </div>
+            
+            <div class="comparison-container" id="comparison">
+                <div class="comparison-image after"></div>
+                <div class="comparison-image before" id="beforeImage"></div>
+                <div class="comparison-label before-label">Before</div>
+                <div class="comparison-label after-label">After</div>
+                <div class="slider-handle" id="sliderHandle">↔</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stylists">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">The Artists</div>
+                <h2>Meet Our Stylists</h2>
+                <p>World-class talent dedicated to your beauty</p>
+            </div>
+            
+            <div class="stylists-grid">
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <div class="stylist-placeholder">👩‍🦳</div>
+                    </div>
+                    <div class="stylist-info">
+                        <h4>Ananya Sharma</h4>
+                        <div class="stylist-role">Creative Director</div>
+                        <div class="stylist-social">
+                            <a href="#">IG</a>
+                            <a href="#">FB</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <div class="stylist-placeholder">👨</div>
+                    </div>
+                    <div class="stylist-info">
+                        <h4>Raj Malhotra</h4>
+                        <div class="stylist-role">Senior Stylist</div>
+                        <div class="stylist-social">
+                            <a href="#">IG</a>
+                            <a href="#">FB</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stylist-card">
+                    <div class="stylist-image">
+                        <div class="stylist-placeholder">👩</div>
+                    </div>
+                    <div class="stylist-info">
+                        <h4>Priya Patel</h4>
+                        <div class="stylist-role">Color Specialist</div>
+                        <div class="stylist-social">
+                            <a href="#">IG</a>
+                            <a href="#">FB</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <div class="section-tag">Portfolio</div>
+            <h2>Our Work</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Testimonials</div>
+                <h2>Client Love</h2>
+            </div>
+            
+            <div class="testimonials-carousel">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text">"The most luxurious salon experience I've ever had. Ananya understood exactly what I wanted and delivered beyond my expectations. Pure artistry."</p>
+                        <div class="testimonial-author">— Meera K.</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"From the moment I walked in, I felt like royalty. The attention to detail, the ambiance, and the results were absolutely worth every rupee."</p>
+                        <div class="testimonial-author">— Sarah J.</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"My bridal makeup was flawless. The team made me feel so special on my big day. Thank you Yash Salon for the memories!"</p>
+                        <div class="testimonial-author">— Priya R.</div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <span class="testimonial-dot active" data-index="0"></span>
+                    <span class="testimonial-dot" data-index="1"></span>
+                    <span class="testimonial-dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Reservations</div>
+                <h2>Book Your Experience</h2>
+                <p>Schedule your appointment for a transformative beauty session</p>
+            </div>
+            
+            <div class="booking-container">
+                <form onsubmit="event.preventDefault(); alert('Thank you for your booking request! We will contact you shortly to confirm your appointment.');">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" placeholder="8401366211" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Service</label>
+                        <select class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option>Hair Styling</option>
+                            <option>Makeup Artistry</option>
+                            <option>Spa Treatment</option>
+                            <option>Bridal Package</option>
+                            <option>Nail Artistry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Special Requests</label>
+                        <textarea class="form-control" placeholder="Any specific requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold" style="width: 100%;">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">📞</div>
+                    <div class="contact-label">Call Us</div>
+                    <a href="tel:8401366211" class="contact-value">8401366211</a>
+                </div>
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">✉️</div>
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:yashsengar.web@gmail.com" class="contact-value">yashsengar.web@gmail.com</a>
+                </div>
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">📍</div>
+                    <div class="contact-label">Visit Us</div>
+                    <span class="contact-value">Mumbai, India</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mobile-sticky-book" id="mobileSticky">
+        <a href="#booking" class="btn-gold">Book Appointment Now</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Yash Salon. All rights reserved. | Crafted with elegance</p>
+    </footer>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + "%";
+            
+            // Navbar background
+            const nav = document.getElementById('navbar');
+            if (winScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Mobile sticky
+            const sticky = document.getElementById('mobileSticky');
+            if (winScroll > 500) {
+                sticky.classList.add('visible');
+            } else {
+                sticky.classList.remove('visible');
+            }
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.section-header, .service-card, .pricing-card, .stylist-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Before/After Slider
+        const comparison = document.getElementById('comparison');
+        const beforeImage = document.getElementById('beforeImage');
+        const sliderHandle = document.getElementById('sliderHandle');
+        let isDragging = false;
+
+        const updateSlider = (x) => {
+            const rect = comparison.getBoundingClientRect();
+            let percentage = ((x - rect.left) / rect.width) * 100;
+            percentage = Math.max(0, Math.min(100, percentage));
+            beforeImage.style.width = percentage + '%';
+            sliderHandle.style.left = percentage + '%';
+        };
+
+        sliderHandle.addEventListener('mousedown', () => isDragging = true);
+        sliderHandle.addEventListener('touchstart', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('touchend', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+        window.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); });
+        comparison.addEventListener('click', (e) => updateSlider(e.clientX));
+
+        // Testimonials Carousel
+        const track = document.getElementById('testimonialTrack');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        const slides = document.querySelectorAll('.testimonial-slide');
+        let currentIndex = 0;
+
+        const goToSlide = (index) => {
+            currentIndex = index;
+            track.style.transform = `translateX(-${index * 100}%)`;
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        };
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            goToSlide(currentIndex);
+        }, 5000);
+
+        // Touch swipe support
+        let touchStartX = 0;
+        track.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        track.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) goToSlide((currentIndex + 1) % slides.length);
+            if (touchEndX - touchStartX > 50) goToSlide((currentIndex - 1 + slides.length) % slides.length);
+        });
+    </script>
+</body>
+</html>
